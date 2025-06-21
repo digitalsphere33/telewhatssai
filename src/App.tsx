@@ -220,28 +220,6 @@ const App: React.FC = () => {
               {notifications.map((n, i) => <div key={i}>{n}</div>)}
             </div>
           )}
-          {/* Filter/Search Bar */}
-          <div className="dashboard-searchbar" style={{ marginBottom: 16, display: 'flex', gap: 8, padding: '0 24px', flexWrap: 'wrap' }}>
-            <form onSubmit={handleAdvancedSearch} style={{ display: 'flex', gap: 8, flexWrap: 'wrap', width: '100%' }}>
-              <select value={advFilter.platform} onChange={e => setAdvFilter(f => ({ ...f, platform: e.target.value }))} style={{ padding: 10, borderRadius: 8, border: '1px solid #bbb' }}>
-                <option value="">All Platforms</option>
-                <option value="telegram">Telegram</option>
-                <option value="whatsapp">WhatsApp</option>
-              </select>
-              <input value={advFilter.sender} onChange={e => setAdvFilter(f => ({ ...f, sender: e.target.value }))} placeholder="Sender" style={{ padding: 10, borderRadius: 8, border: '1px solid #bbb' }} />
-              <input value={advFilter.group} onChange={e => setAdvFilter(f => ({ ...f, group: e.target.value }))} placeholder="Group (WhatsApp)" style={{ padding: 10, borderRadius: 8, border: '1px solid #bbb' }} />
-              <input type="date" value={advFilter.dateFrom} onChange={e => setAdvFilter(f => ({ ...f, dateFrom: e.target.value }))} style={{ padding: 10, borderRadius: 8, border: '1px solid #bbb' }} />
-              <input type="date" value={advFilter.dateTo} onChange={e => setAdvFilter(f => ({ ...f, dateTo: e.target.value }))} style={{ padding: 10, borderRadius: 8, border: '1px solid #bbb' }} />
-              <select value={advFilter.messageType} onChange={e => setAdvFilter(f => ({ ...f, messageType: e.target.value }))} style={{ padding: 10, borderRadius: 8, border: '1px solid #bbb' }}>
-                <option value="">All Types</option>
-                <option value="text">Text</option>
-                <option value="image">Image</option>
-              </select>
-              <input value={advFilter.keywords} onChange={e => setAdvFilter(f => ({ ...f, keywords: e.target.value }))} placeholder="Keywords" style={{ padding: 10, borderRadius: 8, border: '1px solid #bbb', flex: 1, minWidth: 120 }} />
-              <button type="submit" style={{ padding: '10px 18px', borderRadius: 8, border: 'none', background: '#007bff', color: '#fff', minWidth: 90 }}>Advanced Search</button>
-              <button type="button" onClick={() => { setAdvFilter({ platform: '', sender: '', group: '', dateFrom: '', dateTo: '', messageType: '', keywords: '' }); fetch(`${API_URL}/messages`).then(res => res.json()).then(setMessages); }} style={{ padding: '10px 18px', borderRadius: 8, border: 'none', background: '#bbb', color: '#222', minWidth: 90 }}>Reset</button>
-            </form>
-          </div>
           {/* Recent Messages Table with Badges, Threading, Admin Tools */}
           <h2 style={{ borderBottom: '2px solid #007bff', paddingBottom: 8, marginBottom: 16 }}>Recent Messages</h2>
           <div style={{ maxHeight: 400, overflowY: 'auto', border: '1px solid #eee', borderRadius: 8, background: darkMode ? 'rgba(24,28,36,0.8)' : 'rgba(255,255,255,0.8)', backdropFilter: 'blur(10px)' }}>
@@ -370,7 +348,7 @@ const App: React.FC = () => {
             </div>
           </div>
           {/* AI Jobcards Section */}
-          <JobcardDashboard />
+          <JobcardDashboard darkMode={darkMode} />
         </Container>
       </Box>
     </ThemeProvider>
